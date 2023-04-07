@@ -1,7 +1,7 @@
 include_directories('../include')
 src = files(
-  'test.cpp',
-  '../src/object.cpp'
+  'logger.cpp',
+  '../src/Logger.cpp',
 )
 exec = executable('first_test', src, dependencies: deps)
-test('test', exec)
+test('testing logger', exec)
