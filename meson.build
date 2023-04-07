@@ -3,22 +3,20 @@ project('gra', 'cpp',
 
 EXECUTABLE_NAME='exec'
 
-src_arr = [
-  'main.cpp'
-]
+src = files(
+  'src/main.cpp'
+  )
 
-deps_arr = [
+include_directories('include')
 
+deps = [
+  dependency('sdl2'),
+  dependency('sdl2_image'),
+  dependency('sdl2_ttf'),
+  dependency('sdl2_mixer'),
+  dependency('sdl2_net'),
   ]
 
-src = []
-foreach file : src_arr
-  src += 'src/' + file
-endforeach
+subdir('tests')
 
-deps = []
-foreach dep : deps_arr
-  deps += dependency(dep)
-endforeach
-
-executable(EXECUTABLE_NAME, sources: src, dependencies: deps)
+executable(EXECUTABLE_NAME, src, dependencies: deps)
