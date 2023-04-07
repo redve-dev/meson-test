@@ -4,7 +4,8 @@ project('gra', 'cpp',
 EXECUTABLE_NAME='exec'
 
 src = files(
-  'src/main.cpp'
+  'src/main.cpp',
+  'src/object.cpp'
   )
 
 include_directories('include')
