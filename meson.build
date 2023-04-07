@@ -5,7 +5,8 @@ EXECUTABLE_NAME='exec'
 
 src = files(
   'src/main.cpp',
-  'src/object.cpp'
+  'src/Game.cpp',
+  'src/Logger.cpp'
   )
 
 include_directories('include')
