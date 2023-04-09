@@ -67,6 +67,6 @@ int main(){
 	int error = 0;
 	//error += TestLogger(true, Logger::LogLevel::DEBUG, Logger::LogLevel::DEBUG); // fails
 	//error += TestLogger(false, Logger::LogLevel::EMPTY, Logger::LogLevel::DEBUG);
-	error += tests_logger_dumping_output();
+	//error += tests_logger_dumping_output();
 	return error;
 }

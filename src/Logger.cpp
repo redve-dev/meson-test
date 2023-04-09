@@ -5,6 +5,7 @@
 #include <sstream>
 #include <iomanip>
 #include <fstream>
+#include <chrono>
 
 std::list<std::string> Logger::logMessages;
 
@@ -23,7 +24,10 @@ void Logger::Log(const char* message, const Logger::LogLevel level) noexcept {
 	};
 	if (level >= Logger::logLevel && level != LogLevel::EMPTY){
 		std::stringstream ss;
-		ss << std::setw(80) << std::left<< message <<" | "<< std::setw(8)<<logLevelMap.at(level) << " | ";
+		const auto now = std::chrono::system_clock::now();
+		const auto now_c = std::chrono::system_clock::to_time_t(now);
+		ss << std::put_time(std::localtime(&now_c), "%X") << " | ";
+		ss << std::setw(80) << std::left<< message <<" | "<< std::setw(8)<<logLevelMap.at(level);
 		logMessages.push_back(ss.str().c_str());
 	}
 }

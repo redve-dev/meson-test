@@ -19,6 +19,6 @@ deps = [
   dependency('sdl2_net'),
   ]
 
-subdir('tests')
 
 executable(EXECUTABLE_NAME, src, dependencies: deps)
+subdir('tests')
