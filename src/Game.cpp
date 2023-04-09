@@ -4,11 +4,41 @@
 
 Game::Game(int w, int h){
 	if (SDL_Init(SDL_INIT_EVERYTHING) != 0){
-		std::cout << "SDL_Init Error: " << SDL_GetError() << std::endl;
+		char* message = nullptr;
+		sprintf(message, "SDL_Init Error: %s", SDL_GetError());
+		logger.Log(message, LogLevel::ERROR);
 	}
 	window = SDL_CreateWindow("Game", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, w, h, SDL_WINDOW_SHOWN);
 	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
-	if (window == nullptr){
-		std::cout << "SDL_CreateWindow Error: " << SDL_GetError() << std::endl;
+	if (window == nullptr || renderer == nullptr){
+		logger.Log("Could not create window or renderer", LogLevel::ERROR);
+	}
+	isRunning = true;
+}
+
+Game::~Game(){
+	SDL_DestroyRenderer(renderer);
+	SDL_DestroyWindow(window);
+	SDL_Quit();
+}
+
+void Game::HandleEvents(){
+	while (SDL_PollEvent(&event)){
+		if (event.type == SDL_QUIT){
+			isRunning = false;
+		}
+	}
+}
+
+void Game::Update(double dt){
+	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+	SDL_RenderClear(renderer);
+	SDL_RenderPresent(renderer);
+}
+
+void Game::MainLoop(){
+	while (isRunning){
+		HandleEvents();
+		Update(0.0);
 	}
 }
