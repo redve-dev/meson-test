@@ -38,7 +38,7 @@ void Logger::SetLogLevel(const LogLevel level) noexcept {
 
 void Logger::dumpLogMessages(std::ostream& os) noexcept {
 	for (auto& message : logMessages){
-		os << message << std::endl;
+		os << message << '\n';
 	}
 }
 
