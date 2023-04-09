@@ -1,15 +1,15 @@
+#pragma once
 #include <iostream>
 #include <list>
 
+enum class LogLevel{
+	INFO,
+	WARNING,
+	ERROR,
+	DEBUG,
+	EMPTY
+};
 class Logger{
-	public:
-		enum class LogLevel{
-			INFO,
-			WARNING,
-			ERROR,
-			DEBUG,
-			EMPTY
-		};
 	private:
 		LogLevel logLevel;
 		static std::list<std::string> logMessages;

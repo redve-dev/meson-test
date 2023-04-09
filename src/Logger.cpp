@@ -14,7 +14,7 @@ Logger::Logger() noexcept:
 {
 }
 
-void Logger::Log(const char* message, const Logger::LogLevel level) noexcept {
+void Logger::Log(const char* message, const LogLevel level) noexcept {
 	const std::unordered_map<LogLevel, const char*> logLevelMap = {
 		{LogLevel::INFO, "INFO"},
 		{LogLevel::WARNING, "WARNING"},
@@ -32,7 +32,7 @@ void Logger::Log(const char* message, const Logger::LogLevel level) noexcept {
 	}
 }
 
-void Logger::SetLogLevel(const Logger::LogLevel level) noexcept {
+void Logger::SetLogLevel(const LogLevel level) noexcept {
 	Logger::logLevel = level;
 }
 
