@@ -1,6 +1,7 @@
 #include "include/Game.hpp"
 #include "SDL_video.h"
 #include <iostream>
+#include <chrono>
 
 Game::Game(int w, int h){
 	if (SDL_Init(SDL_INIT_EVERYTHING) != 0){
@@ -12,6 +13,7 @@ Game::Game(int w, int h){
 	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 	if (window == nullptr || renderer == nullptr){
 		logger.Log("Could not create window or renderer", LogLevel::ERROR);
+		throw std::runtime_error("Could not create window or renderer");
 	}
 	isRunning = true;
 }
@@ -37,8 +39,15 @@ void Game::Update(double dt){
 }
 
 void Game::MainLoop(){
+	using namespace std::chrono;
+	auto stop = high_resolution_clock::now();
+	auto start = high_resolution_clock::now();
 	while (isRunning){
 		HandleEvents();
-		Update(0.0);
+		stop = high_resolution_clock::now();
+		auto elapsed_ms = duration_cast<milliseconds>(stop - start).count();
+		const auto dt = elapsed_ms / 1000.0;
+		start = high_resolution_clock::now();
+		Update(dt);
 	}
 }
