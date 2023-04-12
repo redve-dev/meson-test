@@ -58,3 +58,7 @@ void Logger::DumpLogsToStdout() noexcept {
 void Logger::ClearLogs() noexcept {
 	logMessages.clear();
 }
+
+void Logger::Log(const std::string& message, const LogLevel level) noexcept {
+	Log(message.c_str(), level);
+}

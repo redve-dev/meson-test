@@ -17,6 +17,7 @@ class Logger{
 	public:
 		Logger() noexcept;
 		void Log(const char* message, const LogLevel logLevel) noexcept;
+		void Log(const std::string& message, const LogLevel logLevel) noexcept;
 		void SetLogLevel(const LogLevel logLevel) noexcept;
 		void DumpLogsToFile(const char* fileName) ;
 		void DumpLogsToStdout() noexcept;
