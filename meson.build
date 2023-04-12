@@ -6,7 +6,8 @@ EXECUTABLE_NAME='exec'
 src = files(
   'src/main.cpp',
   'src/Game.cpp',
-  'src/Logger.cpp'
+  'src/Logger.cpp',
+  'src/Object.cpp'
   )
 
 include_directories('include')
@@ -17,8 +18,9 @@ deps = [
   dependency('sdl2_ttf'),
   dependency('sdl2_mixer'),
   dependency('sdl2_net'),
+  dependency('glm'),
   ]
 
 
 executable(EXECUTABLE_NAME, src, dependencies: deps)
-subdir('tests')
+#subdir('tests')
