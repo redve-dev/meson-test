@@ -7,7 +7,8 @@ src = files(
   'src/main.cpp',
   'src/Game.cpp',
   'src/Logger.cpp',
-  'src/Object.cpp'
+  'src/Object.cpp',
+  'src/Level.cpp',
   )
 
 include_directories('include')
