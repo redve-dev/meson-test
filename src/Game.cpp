@@ -35,13 +35,24 @@ void Game::HandleEvents(){
 void Game::Update(double dt){
 	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 	SDL_RenderClear(renderer);
+	for (auto& object : objects){
+		object->Update(dt);
+		object->Draw(renderer);
+	}
 	SDL_RenderPresent(renderer);
+}
+
+static void PushObject(std::vector<std::shared_ptr<Object>>& objects, std::shared_ptr<Object> object){
+	objects.push_back(std::move(object));
 }
 
 void Game::MainLoop(){
 	using namespace std::chrono;
 	auto stop = high_resolution_clock::now();
 	auto start = high_resolution_clock::now();
+	auto object = std::make_shared<Object>(glm::vec2(0, 0), glm::vec2(100, 0), glm::vec2(100, 100));
+	PushObject(objects, object);
+	object->Update(2);
 	while (isRunning){
 		HandleEvents();
 		stop = high_resolution_clock::now();
